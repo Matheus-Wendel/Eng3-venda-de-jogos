@@ -3,37 +3,44 @@ package fatec.DAO;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
-import fatec.model.Compra;
 import fatec.model.EntidadeDominio;
+import fatec.model.Compra;
+import fatec.repository.CompraRepository;
 
 @Service
 public class CompraDAO implements IDAO {
 
+	@Autowired
+	private CompraRepository repository;
+	
 	@Override
-	public EntidadeDominio save(EntidadeDominio EntidadeDominio) {
-		// TODO Auto-generated method stub
-		return null;
+	public EntidadeDominio save(EntidadeDominio entidadeDominio) {
+		Compra compra = (Compra) entidadeDominio;
+		return repository.save(compra);				
 	}
 
 	@Override
-	public EntidadeDominio delete(EntidadeDominio entidadeDominio) {
-		// TODO Auto-generated method stub
-		return null;
+	public void delete(EntidadeDominio entidadeDominio) {
+		Compra compra = (Compra) entidadeDominio;
+		repository.deleteById(compra.getId());
+		
 	}
 
 	@Override
-	public List<? extends EntidadeDominio> find(EntidadeDominio entidadeDominio) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<? extends EntidadeDominio> find(EntidadeDominio entidadeDominio) {		
+		return repository.findAll();
 	}
 
 	@Override
 	public EntidadeDominio update(EntidadeDominio entidadeDominio) {
-		// TODO Auto-generated method stub
+		Compra compra = (Compra) entidadeDominio;
+		if(repository.existsById(compra.getId())) {
+			return repository.save(compra);
+		}	
 		return null;
 	}
+	
 
 }

@@ -3,6 +3,10 @@ package fatec.model;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 public class Jogo extends EntidadeDominio {
@@ -12,6 +16,8 @@ public class Jogo extends EntidadeDominio {
 	private String plataforma;
 	private double valor;
 	private String descricao;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@Temporal(TemporalType.DATE)
 	private Date dataLancamento;
 	
 	public String getNome() {

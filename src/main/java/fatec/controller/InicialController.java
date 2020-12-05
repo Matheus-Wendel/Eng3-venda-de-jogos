@@ -1,28 +1,20 @@
 package fatec.controller;
 
 import org.apache.tomcat.jni.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import fatec.command.CommandBuscar;
 import fatec.model.Jogo;
 import fatec.repository.JogoRepository;
 
 @Controller
 public class InicialController {
 
-	private JogoRepository jogoRepository;
-
-	public InicialController(JogoRepository jogoRepository) {
-		this.jogoRepository = jogoRepository;
-		
-		var jogo = new Jogo();
-		jogo.setNome("Zelda");
-		jogo.setGenero("plataforma");
-		jogo.setPlataforma("SNES");
-		jogo.setValor(50.0);
-		jogoRepository.save(jogo);
-	}
+	@Autowired
+	CommandBuscar commandBuscar;
 
 	// @GetMapping("/signup")
 	// public ModelAndView paginaCadastroUsuario(User user) {
@@ -39,9 +31,12 @@ public class InicialController {
 	public ModelAndView paginaInicial() {
 
 		ModelAndView mv = new ModelAndView("index");
-		mv.addObject("jogos", jogoRepository.findAll());
+		mv.addObject("jogos", commandBuscar.execute(new Jogo()));
 		return mv;
 	}
+
+	
+	
 
 	// @PostMapping("/adduser")
 	// public ModelAndView salvarUsuario(User user) {

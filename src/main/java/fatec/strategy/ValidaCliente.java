@@ -1,10 +1,8 @@
 package fatec.strategy;
 
-import org.springframework.stereotype.Service;
-
 import fatec.model.Cliente;
 import fatec.model.EntidadeDominio;
-@Service
+
 public class ValidaCliente implements IStrategy {
 
 	@Override
