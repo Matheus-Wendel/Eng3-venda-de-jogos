@@ -17,7 +17,7 @@ public class InicialController {
 		this.jogoRepository = jogoRepository;
 		
 		var jogo = new Jogo();
-		jogo.setNome("Super mario");
+		jogo.setNome("Zelda");
 		jogo.setGenero("plataforma");
 		jogo.setPlataforma("SNES");
 		jogo.setValor(50.0);
