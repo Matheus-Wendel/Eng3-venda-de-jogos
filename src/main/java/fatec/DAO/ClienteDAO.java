@@ -1,5 +1,6 @@
 package fatec.DAO;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,34 +14,42 @@ import fatec.repository.ClienteRepository;
 public class ClienteDAO implements IDAO {
 
 	@Autowired
-	private ClienteRepository repository;
+	private ClienteRepository clienteRepository;
 	
 	@Override
 	public EntidadeDominio save(EntidadeDominio entidadeDominio) {
 		Cliente cliente = (Cliente) entidadeDominio;
-		return repository.save(cliente);				
+		return clienteRepository.save(cliente);				
 	}
-
+	
+	
 	@Override
 	public void delete(EntidadeDominio entidadeDominio) {
 		Cliente cliente = (Cliente) entidadeDominio;
-		repository.deleteById(cliente.getId());
+		clienteRepository.deleteById(cliente.getId());
 		
 	}
 
 	@Override
 	public List<? extends EntidadeDominio> find(EntidadeDominio entidadeDominio) {		
-		return repository.findAll();
+		Cliente cliente = (Cliente) entidadeDominio;
+		if(cliente.getId() != null)
+		{
+			Cliente resultado = clienteRepository.findById(cliente.getId()).get();
+			return Arrays.asList(resultado);
+		}
+		return clienteRepository.findAll();
 	}
 
 	@Override
 	public EntidadeDominio update(EntidadeDominio entidadeDominio) {
 		Cliente cliente = (Cliente) entidadeDominio;
-		if(repository.existsById(cliente.getId())) {
-			return repository.save(cliente);
+		System.err.println(cliente.getId());
+		System.err.println(cliente.getNome());
+		if(clienteRepository.existsById(cliente.getId())) {
+			return clienteRepository.save(cliente);
 		}	
 		return null;
 	}	
-	
 	
 }

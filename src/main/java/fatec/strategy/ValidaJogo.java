@@ -28,6 +28,15 @@ public class ValidaJogo implements IStrategy {
 			sb.append("Jogo com nome ja cadastrado");
 			System.err.println(jogo.getNome());
 		}
+		if(jogo.getGenero() == null || jogo.getGenero().trim().isEmpty()) {
+			sb.append("Campo gênero não pode ser vazio");
+		}	
+		if(jogo.getPlataforma() == null || jogo.getPlataforma().trim().isEmpty()) {
+			sb.append("Campo plataforma não pode ser vazio");
+		}	
+		if(jogo.getDescricao() == null  || jogo.getDescricao().trim().isEmpty()) {
+			sb.append("Campo descrição não pode ser vazio");
+		}	
 		return sb.toString();
 	}
 }

@@ -13,8 +13,8 @@ import fatec.repository.JogoRepository;
 @Controller
 public class InicialController {
 
-	@Autowired
-	CommandBuscar commandBuscar;
+//	@Autowired
+//	CommandBuscar commandBuscar;
 
 	// @GetMapping("/signup")
 	// public ModelAndView paginaCadastroUsuario(User user) {
@@ -30,8 +30,7 @@ public class InicialController {
 	@GetMapping("/")
 	public ModelAndView paginaInicial() {
 
-		ModelAndView mv = new ModelAndView("index");
-		mv.addObject("jogos", commandBuscar.execute(new Jogo()));
+		ModelAndView mv = new ModelAndView("index");		
 		return mv;
 	}
 

@@ -34,11 +34,19 @@ public class JogoController {
 	private CommandAtualizar commandAtualizar;
 	
 	
+	@GetMapping("/paginaInicioJogo")
+	public ModelAndView paginaInicial() {
+
+		ModelAndView mv = new ModelAndView("inicial-jogo");
+		mv.addObject("jogos", commandBuscar.execute(new Jogo()));
+		return mv;
+	}
+	
 
 	@PostMapping("/novo")
 	public ModelAndView salvarJogo(Jogo jogo) {
 		commandSalvar.execute(jogo);
-		ModelAndView mv = new ModelAndView("redirect:/");
+		ModelAndView mv = new ModelAndView("redirect:/jogo/paginaInicioJogo");
 		return mv;
 	}
 	
@@ -67,18 +75,18 @@ public class JogoController {
 	public ModelAndView atualizarJogo(@PathVariable("id") long id, Jogo jogo) {
 		jogo.setId(id);
 		commandAtualizar.execute(jogo);
-		ModelAndView mv = new ModelAndView("redirect:/");
+		ModelAndView mv = new ModelAndView("redirect:/jogo/paginaInicioJogo");
 		
 		return mv;
 	}
 
 	@GetMapping("/excluir/{id}")
-	public ModelAndView paginaApagarUsuario(@PathVariable("id") long id) {
+	public ModelAndView paginaApagarJogo(@PathVariable("id") long id) {
 		Jogo jogo = new Jogo();
 		jogo.setId(id);
 	    commandExcluir.execute(jogo);
 		
-	    ModelAndView mv = new ModelAndView("redirect:/");
+	    ModelAndView mv = new ModelAndView("redirect:/jogo/paginaInicioJogo");
 		
 		return mv;
 	}
