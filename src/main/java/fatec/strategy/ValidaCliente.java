@@ -6,11 +6,11 @@ import fatec.repository.ClienteRepository;
 
 public class ValidaCliente implements IStrategy {
 
-	private ClienteRepository clienteRepository;
+	private ClienteRepository clienteRepository;	
 	
 	public ValidaCliente(ClienteRepository clienteRepository)
 	{
-		this.clienteRepository = clienteRepository;
+		this.clienteRepository = clienteRepository;		
 	}
 	
 	@Override
@@ -19,19 +19,38 @@ public class ValidaCliente implements IStrategy {
 		StringBuilder sb = new StringBuilder();
 		
 		if(cliente.getNome() == null || cliente.getNome().trim().isEmpty()) {
-			sb.append("Campo nome não pode ser vazio");
+			sb.append("Campo nome não pode ser vazio/");
 		}			
 		Cliente existe = clienteRepository.findByCpf(cliente.getCpf());
 		if(existe != null)
 		{
-			sb.append("Cliente com cpf ja cadastrado");
-			System.err.println(cliente.getCpf());
+			if(cliente.getId() != null) {
+				if(existe.getId() != cliente.getId()) {
+					sb.append(" Cliente com cpf ja cadastrado/");
+				}
+			}
+			else {
+				sb.append(" Cliente com cpf ja cadastrado/");
+			}			
 		}
 		if(cliente.getCpf() == null || cliente.getCpf().trim().isEmpty()) {
-			sb.append("Campo CPF não pode ser vazio");
+			sb.append(" Campo CPF não pode ser vazio/");
 		}	
 		
+		if(cliente.getEndereco().getLogradouro() == null || cliente.getEndereco().getLogradouro().trim().isEmpty()) {
+			sb.append(" Campo Logradouro não pode ser vazio/");
+		}
+		
+		if(cliente.getEndereco().getCep() == null || cliente.getEndereco().getCep().trim().isEmpty()) {
+			sb.append(" Campo Cep não pode ser vazio/");
+		}
+		
+		if(cliente.getEndereco().getNumero() == null || cliente.getEndereco().getNumero().trim().isEmpty()) {
+			sb.append("Campo Numero não pode ser vazio/");
+		}
+	
 		return sb.toString();
 	}
+
 }
 

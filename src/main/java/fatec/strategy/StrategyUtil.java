@@ -17,17 +17,23 @@ public class StrategyUtil {
 	private JogoRepository jogoRepository;
 	
 	@Autowired
-	private ClienteRepository clienteRepository;
+	private ClienteRepository clienteRepository;	
+	
 
 	public Map<String, IStrategy> getStrategies() {
 
 		ValidaCliente validaCliente = new ValidaCliente(clienteRepository);
 		ValidaJogo validaJogo = new ValidaJogo(jogoRepository);
+		ValidaCompra validaCompra = new ValidaCompra(jogoRepository);
 		
 		Map<String, IStrategy> mapaStrategies = new HashMap<>();
 		
 		mapaStrategies.put("clienteSalvar", validaCliente);	
 		mapaStrategies.put("jogoSalvar", validaJogo);	
+		mapaStrategies.put("compraSalvar", validaCompra);
+		mapaStrategies.put("clienteAtualizar", validaCliente);	
+		mapaStrategies.put("jogoAtualizar", validaJogo);
+		mapaStrategies.put("compraAtualizar", validaCompra);
 		
 
 		return mapaStrategies;

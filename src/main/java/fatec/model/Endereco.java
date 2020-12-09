@@ -3,13 +3,14 @@ package fatec.model;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 
+
 @Entity
 public class Endereco extends EntidadeDominio {
 
 	private String logradouro;
 	private String cep;
 	private String complemento;
-	private String rua;
+	private String numero;
 	@ManyToOne
 	private Cidade cidade;
 	
@@ -32,11 +33,11 @@ public class Endereco extends EntidadeDominio {
 	public void setComplemento(String complemento) {
 		this.complemento = complemento;
 	}
-	public String getRua() {
-		return rua;
+	public String getNumero() {
+		return numero;
 	}
-	public void setRua(String rua) {
-		this.rua = rua;
+	public void setNumero(String numero) {
+		this.numero = numero;
 	}
 	public Cidade getCidade() {
 		return cidade;
@@ -44,6 +45,5 @@ public class Endereco extends EntidadeDominio {
 	public void setCidade(Cidade cidade) {
 		this.cidade = cidade;
 	}
-	
 	
 }

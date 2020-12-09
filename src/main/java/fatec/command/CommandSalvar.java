@@ -13,7 +13,7 @@ public class CommandSalvar implements ICommand {
 	Facade fachada;
 
 	@Override
-	public EntidadeDominio execute(EntidadeDominio entidade) {
+	public EntidadeDominio execute(EntidadeDominio entidade) throws Exception {
 		return fachada.save(entidade);
 	}
 

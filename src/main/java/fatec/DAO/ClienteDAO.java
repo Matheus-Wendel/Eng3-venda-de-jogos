@@ -10,11 +10,14 @@ import fatec.model.Cliente;
 import fatec.model.EntidadeDominio;
 import fatec.repository.ClienteRepository;
 
+
+
 @Service
 public class ClienteDAO implements IDAO {
 
 	@Autowired
 	private ClienteRepository clienteRepository;
+	
 	
 	@Override
 	public EntidadeDominio save(EntidadeDominio entidadeDominio) {
@@ -38,7 +41,8 @@ public class ClienteDAO implements IDAO {
 			Cliente resultado = clienteRepository.findById(cliente.getId()).get();
 			return Arrays.asList(resultado);
 		}
-		return clienteRepository.findAll();
+		
+		return clienteRepository.findAll();		
 	}
 
 	@Override

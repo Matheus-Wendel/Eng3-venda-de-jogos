@@ -37,6 +37,10 @@ public class ValidaJogo implements IStrategy {
 		if(jogo.getDescricao() == null  || jogo.getDescricao().trim().isEmpty()) {
 			sb.append("Campo descrição não pode ser vazio");
 		}	
+		if(jogo.getValor() == 0  || jogo.getDescricao().trim().isEmpty()) {
+			sb.append("Campo valor não pode ser vazio");
+		}	
+		
 		return sb.toString();
 	}
 }

@@ -15,6 +15,7 @@ import fatec.command.CommandBuscar;
 import fatec.command.CommandExcluir;
 import fatec.command.CommandSalvar;
 import fatec.model.Cliente;
+import fatec.model.Endereco;
 import fatec.model.EntidadeDominio;
 
 
@@ -46,9 +47,16 @@ public class ClienteController {
 
 	@PostMapping("/novo")
 	public ModelAndView salvarCLiente(Cliente cliente) {
-		commandSalvar.execute(cliente);
-		ModelAndView mv = new ModelAndView("redirect:/cliente/paginaInicioCliente");
-		return mv;
+		try {
+			commandSalvar.execute(cliente);
+			ModelAndView mv = new ModelAndView("redirect:/cliente/paginaInicioCliente");
+			return mv;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			ModelAndView mv = new ModelAndView("add-cliente");
+			mv.addObject("mensagem", e.getMessage());
+			return mv;
+		}		
 	}
 	
 	@GetMapping("/paginaCadastro")

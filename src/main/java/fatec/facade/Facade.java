@@ -1,5 +1,6 @@
 package fatec.facade;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -7,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import fatec.DAO.IDAO;
+import fatec.log.Log;
+import fatec.log.LogRepository;
 import fatec.model.EntidadeDominio;
 import fatec.strategy.IStrategy;
 import fatec.strategy.StrategyUtil;
@@ -16,12 +19,14 @@ public class Facade implements Ifacade {
 	
 	private Map<String, IDAO> mapaDaos;
 	private Map<String, IStrategy> mapaStrategies;
+	private LogRepository logRepository;
 	
 	@Autowired
-	public Facade(Map<String, IDAO> mapaDaos, StrategyUtil strategyUtil)
+	public Facade(Map<String, IDAO> mapaDaos, StrategyUtil strategyUtil, LogRepository logRepository)
 	{
 		this.mapaDaos = mapaDaos;	
 		this.mapaStrategies = strategyUtil.getStrategies();
+		this.logRepository = logRepository;
 	}
 	
 	public IStrategy getStrategy(EntidadeDominio entidade, String metodo)
@@ -37,7 +42,7 @@ public class Facade implements Ifacade {
 	}
 	
 	@Override
-	public EntidadeDominio save(EntidadeDominio entidade) {
+	public EntidadeDominio save(EntidadeDominio entidade) throws Exception {
 		IStrategy strategy = getStrategy(entidade, "Salvar");
 		String erros = "";
 		if(strategy != null)
@@ -47,10 +52,13 @@ public class Facade implements Ifacade {
 		if(erros.isEmpty())
 		{
 			IDAO dao = getDAO(entidade);
-			return dao.save(entidade) ;
+			EntidadeDominio entidadeSalva = dao.save(entidade);
+			gerarLog(entidadeSalva, "Salvar");
+			return entidadeSalva;
 		}
 		
-		return null;
+		throw new Exception(erros);		
+		
 	}
 
 	@Override
@@ -64,6 +72,7 @@ public class Facade implements Ifacade {
 		if(erros.isEmpty())
 		{
 			IDAO dao = getDAO(entidade);
+			gerarLog(entidade, "Excluir");
 			dao.delete(entidade);
 		}
 		
@@ -88,11 +97,21 @@ public class Facade implements Ifacade {
 		if(erros.isEmpty())
 		{
 			IDAO dao = getDAO(entidade);
-			return dao.update(entidade) ;
+			EntidadeDominio entidadeAtualizada = dao.save(entidade);
+			gerarLog(entidadeAtualizada, "Atualizar");
+			return entidadeAtualizada;
 		}
 		
 		return null;
 	}
 
+	public void gerarLog(EntidadeDominio entidade, String metodo) {
+		Log log = new Log();
+		log.setIdAlterado(entidade.getId());
+		log.setMetodo(metodo);
+		log.setNomeTabela(entidade.getClass().getSimpleName());
+		log.setData(new Date());
+		logRepository.save(log);
+	}
 	
 }

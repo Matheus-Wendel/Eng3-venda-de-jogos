@@ -45,7 +45,12 @@ public class JogoController {
 
 	@PostMapping("/novo")
 	public ModelAndView salvarJogo(Jogo jogo) {
-		commandSalvar.execute(jogo);
+		try {
+			commandSalvar.execute(jogo);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		ModelAndView mv = new ModelAndView("redirect:/jogo/paginaInicioJogo");
 		return mv;
 	}

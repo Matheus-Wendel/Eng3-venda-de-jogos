@@ -14,31 +14,32 @@ public class EnderecoDAO implements IDAO {
 
 
 	@Autowired
-	private EnderecoRepository repository;
+	private EnderecoRepository enderecorepository;
+	
 	
 	@Override
 	public EntidadeDominio save(EntidadeDominio entidadeDominio) {
 		Endereco endereco = (Endereco) entidadeDominio;
-		return repository.save(endereco);				
+		return enderecorepository.save(endereco);				
 	}
 
 	@Override
 	public void delete(EntidadeDominio entidadeDominio) {
 		Endereco endereco = (Endereco) entidadeDominio;
-		repository.deleteById(endereco.getId());
+		enderecorepository.deleteById(endereco.getId());
 		
 	}
 
 	@Override
 	public List<? extends EntidadeDominio> find(EntidadeDominio entidadeDominio) {		
-		return repository.findAll();
+		return enderecorepository.findAll();
 	}
 
 	@Override
 	public EntidadeDominio update(EntidadeDominio entidadeDominio) {
 		Endereco endereco = (Endereco) entidadeDominio;
-		if(repository.existsById(endereco.getId())) {
-			return repository.save(endereco);
+		if(enderecorepository.existsById(endereco.getId())) {
+			return enderecorepository.save(endereco);
 		}	
 		return null;
 	}	

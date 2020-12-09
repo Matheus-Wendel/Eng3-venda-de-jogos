@@ -20,13 +20,21 @@
                             <thead>
                                 <tr>
                                     <th>Nome</th>
-                                    <th>CPF</th>                                    
+                                    <th>CPF</th>   
+                                    <th>Logradouro</th> 
+                                    <th>Cep</th>    
+                                    <th>Complemento</th>  
+                                    <th>Numero</th>                           
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr th:each="cliente : ${clientes}">
                                     <td th:text="${cliente.nome}"></td>
-                                    <td th:text="${cliente.cpf}"></td>                                    
+                                    <td th:text="${cliente.cpf}"></td>  
+                                    <td th:text="${cliente.endereco.logradouro}"></td>  
+                                    <td th:text="${cliente.endereco.cep}"></td>  
+                                    <td th:text="${cliente.endereco.complemento}"></td>
+                                    <td th:text="${cliente.endereco.numero}"></td>                                
                                     <td><a th:href="@{/cliente/paginaAtualizar/{id}(id=${cliente.id})}" class="btn btn-primary"><i class="fas fa-user-edit m-1"></i></a></td>
                                     <td><a th:href="@{/cliente/excluir/{id}(id=${cliente.id})}" class="btn btn-primary"><i class="fas fa-trash m-1"></i></a></td>
                                  </tr>
