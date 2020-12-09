@@ -4,11 +4,11 @@ import fatec.model.Cliente;
 import fatec.model.EntidadeDominio;
 import fatec.repository.ClienteRepository;
 
-public class ValidaCliente implements IStrategy {
+public class ValidarCliente implements IStrategy {
 
 	private ClienteRepository clienteRepository;	
 	
-	public ValidaCliente(ClienteRepository clienteRepository)
+	public ValidarCliente(ClienteRepository clienteRepository)
 	{
 		this.clienteRepository = clienteRepository;		
 	}

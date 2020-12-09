@@ -4,12 +4,12 @@ import fatec.model.Jogo;
 import fatec.repository.JogoRepository;
 import fatec.model.EntidadeDominio;
 
-public class ValidaJogo implements IStrategy {
+public class ValidarJogo implements IStrategy {
 
 	
 	private JogoRepository jogoRepository;
 	
-	public ValidaJogo(JogoRepository jogoRepository)
+	public ValidarJogo(JogoRepository jogoRepository)
 	{
 		this.jogoRepository = jogoRepository;
 	}
@@ -22,9 +22,8 @@ public class ValidaJogo implements IStrategy {
 		if(jogo.getNome() == null || jogo.getNome().trim().isEmpty()) {
 			sb.append("Campo nome não pode ser vazio/");
 		}			
-		Jogo existeNome = jogoRepository.findByNome(jogo.getNome());
-		Jogo existePlataforma = jogoRepository.findByPlataforma(jogo.getPlataforma());
-		if(existeNome != null && existePlataforma != null)
+		Jogo existeNome = jogoRepository.findByNomeAndPlataforma(jogo.getNome(), jogo.getPlataforma());		
+		if(existeNome != null)
 		{
 			sb.append(" Jogo já cadastrado/");			
 		}

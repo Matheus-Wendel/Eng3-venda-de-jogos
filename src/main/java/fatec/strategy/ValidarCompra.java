@@ -9,12 +9,12 @@ import java.util.Optional;
 import fatec.model.Compra;
 import fatec.model.EntidadeDominio;
 
-public class ValidaCompra implements IStrategy {
+public class ValidarCompra implements IStrategy {
 
 	
 	private JogoRepository jogoRepository;
 	
-	public ValidaCompra(JogoRepository jogoRepository)
+	public ValidarCompra(JogoRepository jogoRepository)
 	{
 		this.jogoRepository = jogoRepository;
 	}

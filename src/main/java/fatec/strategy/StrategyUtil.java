@@ -22,9 +22,9 @@ public class StrategyUtil {
 
 	public Map<String, IStrategy> getStrategies() {
 
-		ValidaCliente validaCliente = new ValidaCliente(clienteRepository);
-		ValidaJogo validaJogo = new ValidaJogo(jogoRepository);
-		ValidaCompra validaCompra = new ValidaCompra(jogoRepository);
+		ValidarCliente validaCliente = new ValidarCliente(clienteRepository);
+		ValidarJogo validaJogo = new ValidarJogo(jogoRepository);
+		ValidarCompra validaCompra = new ValidarCompra(jogoRepository);
 		
 		Map<String, IStrategy> mapaStrategies = new HashMap<>();
 		

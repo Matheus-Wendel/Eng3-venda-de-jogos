@@ -15,7 +15,6 @@ import fatec.command.CommandBuscar;
 import fatec.command.CommandExcluir;
 import fatec.command.CommandSalvar;
 import fatec.model.Cliente;
-import fatec.model.Endereco;
 import fatec.model.EntidadeDominio;
 
 
