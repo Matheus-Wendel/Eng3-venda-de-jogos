@@ -12,6 +12,7 @@
     <body>
         <div class="container my-5">
             <h2 class="mb-5">Novo Jogo</h2>
+            <div th:if = "${mensagem != null}" th:text = "${mensagem}"/>
             <div class="row">
                 <div class="col-md-12">
                     <form action="#" th:action="@{/jogo/novo}" th:object="${jogo}" method="post">

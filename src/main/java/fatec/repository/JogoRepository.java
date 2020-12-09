@@ -7,4 +7,5 @@ import fatec.model.Jogo;
 public interface JogoRepository extends JpaRepository<Jogo,Long> {
 
 	Jogo findByNome(String nome);
+	Jogo findByPlataforma(String plataforma);
 }

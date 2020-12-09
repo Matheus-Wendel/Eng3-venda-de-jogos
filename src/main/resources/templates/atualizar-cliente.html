@@ -12,6 +12,7 @@
     <body>
         <div class="container my-5">
             <h2 class="mb-5">Atualizar Cliente</h2>
+            <div th:if = "${mensagem != null}" th:text = "${mensagem}"/>
             <div class="row">
                 <div class="col-md-12">
                     <form action="#" th:action="@{/cliente/atualizar/{id}(id=${cliente.id})}" th:object="${cliente}" method="post">

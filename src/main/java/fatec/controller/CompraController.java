@@ -38,12 +38,17 @@ public class CompraController  {
 	public ModelAndView salvarCompra(Compra compra) {
 		try {
 			commandSalvar.execute(compra);
+			ModelAndView mv = new ModelAndView("redirect:/compra/paginaInicio");
+			return mv;
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		ModelAndView mv = new ModelAndView("redirect:/compra/paginaInicio");
-		return mv;
+			ModelAndView mv = new ModelAndView("add-compra");
+			mv.addObject("mensagem", e.getMessage());
+			mv.addObject("clientes", commandBuscar.execute(new Cliente()));
+			mv.addObject("jogos", commandBuscar.execute(new Jogo()));
+			return mv;
+		}	
+		
 	}
 	
 	@GetMapping("/paginaCompra")

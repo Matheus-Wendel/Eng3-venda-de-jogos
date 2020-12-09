@@ -26,11 +26,11 @@ public class ValidaCliente implements IStrategy {
 		{
 			if(cliente.getId() != null) {
 				if(existe.getId() != cliente.getId()) {
-					sb.append(" Cliente com cpf ja cadastrado/");
+					sb.append(" CPF ja cadastrado/");
 				}
 			}
 			else {
-				sb.append(" Cliente com cpf ja cadastrado/");
+				sb.append(" CPF ja cadastrado/");
 			}			
 		}
 		if(cliente.getCpf() == null || cliente.getCpf().trim().isEmpty()) {
@@ -38,15 +38,15 @@ public class ValidaCliente implements IStrategy {
 		}	
 		
 		if(cliente.getEndereco().getLogradouro() == null || cliente.getEndereco().getLogradouro().trim().isEmpty()) {
-			sb.append(" Campo Logradouro não pode ser vazio/");
+			sb.append(" Campo logradouro não pode ser vazio/");
 		}
 		
 		if(cliente.getEndereco().getCep() == null || cliente.getEndereco().getCep().trim().isEmpty()) {
-			sb.append(" Campo Cep não pode ser vazio/");
+			sb.append(" Campo CEP não pode ser vazio/");
 		}
 		
 		if(cliente.getEndereco().getNumero() == null || cliente.getEndereco().getNumero().trim().isEmpty()) {
-			sb.append("Campo Numero não pode ser vazio/");
+			sb.append(" Campo numero não pode ser vazio");
 		}
 	
 		return sb.toString();

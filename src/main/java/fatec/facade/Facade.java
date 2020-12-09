@@ -87,7 +87,7 @@ public class Facade implements Ifacade {
 	}
 
 	@Override
-	public EntidadeDominio update(EntidadeDominio entidade) {
+	public EntidadeDominio update(EntidadeDominio entidade) throws Exception {
 		IStrategy strategy = getStrategy(entidade, "Atualizar");
 		String erros = "";
 		if(strategy != null)
@@ -102,7 +102,7 @@ public class Facade implements Ifacade {
 			return entidadeAtualizada;
 		}
 		
-		return null;
+		throw new Exception(erros);
 	}
 
 	public void gerarLog(EntidadeDominio entidade, String metodo) {

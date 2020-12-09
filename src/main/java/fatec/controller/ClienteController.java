@@ -82,11 +82,18 @@ public class ClienteController {
 
 	@PostMapping("/atualizar/{id}")
 	public ModelAndView atualizarCliente(@PathVariable("id") long id, Cliente cliente) {
-		cliente.setId(id);
-		commandAtualizar.execute(cliente);
-		ModelAndView mv = new ModelAndView("redirect:/cliente/paginaInicioCliente");
+		try {
+			cliente.setId(id);
+			commandAtualizar.execute(cliente);
+			ModelAndView mv = new ModelAndView("redirect:/cliente/paginaInicioCliente");			
+			return mv;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			ModelAndView mv = new ModelAndView("atualizar-cliente");
+			mv.addObject("mensagem", e.getMessage());
+			return mv;
+		}
 		
-		return mv;
 	}
 
 	@GetMapping("/excluir/{id}")

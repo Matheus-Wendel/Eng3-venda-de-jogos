@@ -47,12 +47,15 @@ public class JogoController {
 	public ModelAndView salvarJogo(Jogo jogo) {
 		try {
 			commandSalvar.execute(jogo);
+			ModelAndView mv = new ModelAndView("redirect:/jogo/paginaInicioJogo");
+			return mv;
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			ModelAndView mv = new ModelAndView("add-jogo");
+			mv.addObject("mensagem", e.getMessage());
+			return mv;
 		}
-		ModelAndView mv = new ModelAndView("redirect:/jogo/paginaInicioJogo");
-		return mv;
+		
 	}
 	
 	@GetMapping("/paginaCadastro")
@@ -78,11 +81,18 @@ public class JogoController {
 
 	@PostMapping("/atualizar/{id}")
 	public ModelAndView atualizarJogo(@PathVariable("id") long id, Jogo jogo) {
-		jogo.setId(id);
-		commandAtualizar.execute(jogo);
-		ModelAndView mv = new ModelAndView("redirect:/jogo/paginaInicioJogo");
+		try {
+			jogo.setId(id);
+			commandAtualizar.execute(jogo);
+			ModelAndView mv = new ModelAndView("redirect:/jogo/paginaInicioJogo");			
+			return mv;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			ModelAndView mv = new ModelAndView("atualizar-jogo");
+			mv.addObject("mensagem", e.getMessage());
+			return mv;
+		}
 		
-		return mv;
 	}
 
 	@GetMapping("/excluir/{id}")

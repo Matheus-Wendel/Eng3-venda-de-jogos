@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>Add Cliente</title>
+        <title>Add Compra</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" >
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
@@ -12,6 +12,7 @@
     <body>
         <div class="container my-5">
             <h2 class="mb-5">Nova Compra</h2>
+            <div th:if = "${mensagem != null}" th:text = "${mensagem}"/>
             <div class="row">
                 <div class="col-md-12">
                     <form action="#" th:action="@{/compra/novo}" th:object="${compra}"  method="post">
@@ -27,10 +28,10 @@
                              <select id="jogo" th:field="*{jogo}">
 								<option value="">Selecione o Jogo</option>
 								<option th:each="jogo : ${jogos}" th:value="${jogo.id}"
-									th:text="${jogo.nome + '    R$' + jogo.valor}" selected="selected"></option>
+									th:text="${jogo.nome + '    /    ' + jogo.plataforma + '    /    R$' + jogo.valor}" selected="selected"></option>
 							</select>	              
                             </div>  
-                             <div class= "form-group col-md-4">
+                            <div class= "form-group col-md-4">
                             <select id="cliente" th:field="*{cliente}">
 								<option value="">Selecione o Cliente</option>
 								<option th:each="cliente : ${clientes}" th:value="${cliente.id}"
